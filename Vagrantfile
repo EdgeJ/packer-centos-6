@@ -3,40 +3,17 @@
 
 Vagrant.configure("2") do |config|
   config.ssh.insert_key = false
-  config.vm.synced_folder '.', '/vagrant', type: 'nfs'
+  config.vm.hostname = "virtualbox-clearos6"
+  config.vm.box = "builds/virtualbox-clearos6.box"
 
-  # VMware Fusion.
-  # `vagrant up vmware --provider=vmware_fusion`
-  config.vm.define "vmware" do |vmware|
-    vmware.vm.hostname = "centos6-vmware"
-    vmware.vm.box = "file://builds/vmware-centos6.box"
-    vmware.vm.network :private_network, ip: "192.168.3.2"
-
-    config.vm.provider :vmware_fusion do |v, override|
-      v.gui = false
-      v.vmx["memsize"] = 1024
-      v.vmx["numvcpus"] = 1
-    end
-
-    config.vm.provision "shell", inline: "echo Hello, World"
+  config.vm.provider :virtualbox do |v|
+    v.gui = false
+    v.memory = 1024
+    v.cpus = 1
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    v.customize ["modifyvm", :id, "--ioapic", "on"]
   end
 
-  # VirtualBox.
-  # `vagrant up virtualbox --provider=virtualbox`
-  config.vm.define "virtualbox" do |virtualbox|
-    virtualbox.vm.hostname = "virtualbox-centos6"
-    virtualbox.vm.box = "file://builds/virtualbox-centos6.box"
-    virtualbox.vm.network :private_network, ip: "172.16.3.2"
-
-    config.vm.provider :virtualbox do |v|
-      v.gui = false
-      v.memory = 1024
-      v.cpus = 1
-      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--ioapic", "on"]
-    end
-
-    config.vm.provision "shell", inline: "echo Hello, World"
-  end
+  config.vm.provision "shell", inline: "echo Hello, World"
 
 end
