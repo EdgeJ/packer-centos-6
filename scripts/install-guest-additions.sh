@@ -10,3 +10,4 @@ mount -t iso9660 -o loop /root/VBoxGuestAdditions.iso ${TEMP_DIR}
 ${TEMP_DIR}/VBoxLinuxAdditions.run
 umount ${TEMP_DIR}
 rm -rf /root/VBoxGuestAdditions.iso
+yum -y remove kernel-devel

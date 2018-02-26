@@ -1,7 +1,6 @@
 #!/bin/bash -eux
 
 # install/upgrade packages
-yum -y install openssl-devel zlib-devel
 yum -y install epel-release wget curl rsync
 yum -y install gcc git
 

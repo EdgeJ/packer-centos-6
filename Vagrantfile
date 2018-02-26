@@ -5,6 +5,7 @@ Vagrant.configure("2") do |config|
   config.ssh.insert_key = false
   config.vm.hostname = "virtualbox-clearos6"
   config.vm.box = "builds/virtualbox-clearos6.box"
+  config.vm.box_url = "file://./builds/virtualbox-clearos6.box"
 
   config.vm.provider :virtualbox do |v|
     v.gui = false
