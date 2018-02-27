@@ -1,18 +1,13 @@
-# Packer Example - CentOS 6 minimal Vagrant Box using Ansible provisioner
+# ClearOS 6 Vagrant box with Packer
 
-**Current CentOS Version Used**: 6.9
+**Current ClearOS Version Used**: 6.9
 
 **Pre-built Vagrant Box**:
 
-  - [`vagrant init geerlingguy/centos6`](https://vagrantcloud.com/geerlingguy/boxes/centos6)
-  - See older versions: http://files.midwesternmac.com/
+  - [`vagrant init edgej25/clearos`](https://app.vagrantup.com/edgej25/boxes/clearos)
 
-This example build configuration installs and configures CentOS 6 x86_64 minimal using Ansible, and then generates two Vagrant box files, for:
+This build configuration installs and configures ClearOS 6.9 x86_64 and generates a VirtualBox Vagrant box file.
 
-  - VirtualBox
-  - VMware
-
-The example can be modified to use more Ansible roles, plays, and included playbooks to fully configure (or partially) configure a box file suitable for deployment for development environments.
 
 ## Requirements
 
@@ -21,30 +16,21 @@ The following software must be installed/present on your local machine before yo
   - [Packer](http://www.packer.io/)
   - [Vagrant](http://vagrantup.com/)
   - [VirtualBox](https://www.virtualbox.org/) (if you want to build the VirtualBox box)
-  - [VMware Fusion](http://www.vmware.com/products/fusion/) (or Workstation - if you want to build the VMware box)
-  - [Ansible](http://docs.ansible.com/intro_installation.html)
 
 ## Usage
 
 Make sure all the required software (listed above) is installed, then cd to the directory containing this README.md file, and run:
 
-    $ packer build centos6.json
+    $ packer build clearos6.json
 
 After a few minutes, Packer should tell you the box was generated successfully.
 
-If you want to only build a box for one of the supported virtualization platforms (e.g. only build the VMware box), add `--only=vmware-iso` to the `packer build` command:
-
-    $ packer build --only=vmware-iso centos6.json
 
 ## Testing built boxes
 
 There's an included Vagrantfile that allows quick testing of the built Vagrant boxes. From this same directory, run one of the following commands after building the boxes:
 
-    # For VMware Fusion:
-    $ vagrant up vmware --provider=vmware_fusion
-    
-    # For VirtualBox:
-    $ vagrant up virtualbox --provider=virtualbox
+    $ vagrant up
 
 ## License
 
@@ -53,3 +39,4 @@ MIT license.
 ## Author Information
 
 Created in 2014 by [Jeff Geerling](http://jeffgeerling.com/), author of [Ansible for DevOps](http://ansiblefordevops.com/).
+Modified for use with building ClearOS in 2018 by John Edge
